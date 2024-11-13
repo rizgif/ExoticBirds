@@ -1,0 +1,47 @@
+# Build and Publish Files
+bin/
+obj/
+out/
+*.exe
+*.dll
+*.pdb
+*.cache
+*.log
+*.vs/
+.vscode/
+.idea/
+
+# User-Specific Files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+
+# DotNet specific
+project.lock.json
+project.fragment.lock.json
+artifacts/
+logs/
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+
+# Config Files
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+# Sensitive Data Files
+birds.db   # SQLite database (only if you don't want the database tracked)
+
+# Publish output (if manually published locally)
+publish/
+
+# Swagger Files (if generated automatically)
+swagger-ui/
+swagger/
