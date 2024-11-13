@@ -1,0 +1,61 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/riz/Desktop/ExoticBirdsAPI/wwwroot/images/bald_eagle.jpg",
+      "PackagePath": "staticwebassets/images/bald_eagle.jpg"
+    },
+    {
+      "Id": "/Users/riz/Desktop/ExoticBirdsAPI/wwwroot/images/emperor_penguin.jpg",
+      "PackagePath": "staticwebassets/images/emperor_penguin.jpg"
+    },
+    {
+      "Id": "/Users/riz/Desktop/ExoticBirdsAPI/wwwroot/images/golden_eagle.jpg",
+      "PackagePath": "staticwebassets/images/golden_eagle.jpg"
+    },
+    {
+      "Id": "/Users/riz/Desktop/ExoticBirdsAPI/wwwroot/images/great_horned_owl.jpg",
+      "PackagePath": "staticwebassets/images/great_horned_owl.jpg"
+    },
+    {
+      "Id": "/Users/riz/Desktop/ExoticBirdsAPI/wwwroot/images/kakapo.jpg",
+      "PackagePath": "staticwebassets/images/kakapo.jpg"
+    },
+    {
+      "Id": "/Users/riz/Desktop/ExoticBirdsAPI/wwwroot/images/kiwi.jpg",
+      "PackagePath": "staticwebassets/images/kiwi.jpg"
+    },
+    {
+      "Id": "/Users/riz/Desktop/ExoticBirdsAPI/wwwroot/images/macaw.jpg",
+      "PackagePath": "staticwebassets/images/macaw.jpg"
+    },
+    {
+      "Id": "/Users/riz/Desktop/ExoticBirdsAPI/wwwroot/images/peacock.jpg",
+      "PackagePath": "staticwebassets/images/peacock.jpg"
+    },
+    {
+      "Id": "/Users/riz/Desktop/ExoticBirdsAPI/wwwroot/images/scarlet_ibis.jpg",
+      "PackagePath": "staticwebassets/images/scarlet_ibis.jpg"
+    },
+    {
+      "Id": "/Users/riz/Desktop/ExoticBirdsAPI/wwwroot/images/toucan.jpg",
+      "PackagePath": "staticwebassets/images/toucan.jpg"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.ExoticBirdsAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.ExoticBirdsAPI.props",
+      "PackagePath": "build\\ExoticBirdsAPI.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.ExoticBirdsAPI.props",
+      "PackagePath": "buildMultiTargeting\\ExoticBirdsAPI.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.ExoticBirdsAPI.props",
+      "PackagePath": "buildTransitive\\ExoticBirdsAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
