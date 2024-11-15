@@ -12,13 +12,15 @@ public class Bird
     [MaxLength(500)]
     public string Description { get; set; }
 
+    // List of countries associated with the bird, comma-separated
+    [MaxLength(200)]  // Adjust as needed
     public string Countries { get; set; }
 
-    public string Image { get; set; }  // URL or file path for the image
+    // Base64 version of the image with max width 100px-300px
+    [Required]
+    public string Base64Image { get; set; }
 
-    public string Base64Image { get; set; }  // Base64 version of the image
-
-    [Range(0, 300)]
-    public int Width { get; set; } = 300;  // Max width of 300px
-
+    // Image width with constraint from 100px to 300px
+    [Range(100, 300)]
+    public int Width { get; set; } = 300;
 }
