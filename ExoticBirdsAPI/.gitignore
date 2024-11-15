@@ -45,3 +45,7 @@ publish/
 # Swagger Files (if generated automatically)
 swagger-ui/
 swagger/
+
+deploy-exoticbirdsapi.sh
+publish.zip
+.DS_Store
