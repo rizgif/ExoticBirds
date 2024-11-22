@@ -15,6 +15,9 @@ struct BirdDeleteView: View {
     
     var body: some View {
         VStack {
+            Text("Delete Bird")
+                .font(.title)
+                .padding()
             TextField("Enter Bird ID", value: $birdId, format: .number)
                 .padding()
                 .keyboardType(.numberPad)
@@ -37,6 +40,7 @@ struct BirdDeleteView: View {
             Alert(title: Text("Delete Result"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
         .padding()
+        .background(Color(red: 0.94, green: 0.85, blue: 1.0))
     }
     
     // Function to send the DELETE request
@@ -84,6 +88,6 @@ struct BirdDeleteView: View {
     }
 }
 
-//#Preview {
-//    BirdDeleteView()
-//}
+#Preview {
+    BirdDeleteView()
+}

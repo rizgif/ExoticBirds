@@ -13,7 +13,7 @@ struct AboutView: View {
     var body: some View {
         ZStack {
             // light pastel blue
-            Color(red: 0.90, green: 0.96, blue: 1)
+            Color(red: 0.94, green: 0.85, blue: 1.0)
                 .edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 10) {
@@ -30,7 +30,7 @@ struct AboutView: View {
                 .font(.body)
                 .foregroundColor(Color(red: 0.2, green: 0.3, blue: 0.4))
                 .padding()
-                .background(Color(red: 0.8, green: 0.9, blue: 1)) // Soft blue background for the text container
+                .background(Color(red: 0.94, green: 0.85, blue: 1.0))
                 .cornerRadius(12)
                 .shadow(radius: 5)
             }

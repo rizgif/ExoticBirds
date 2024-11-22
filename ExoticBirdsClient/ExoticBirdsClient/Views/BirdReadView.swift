@@ -19,6 +19,7 @@ struct BirdReadView: View {
             VStack {
                 // Single Bird Lookup
                 HStack {
+                    
                     TextField("Enter Bird ID", text: $inputID)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.numberPad) // Suggest number pad for input
@@ -123,7 +124,10 @@ struct BirdReadView: View {
                 }
             }
             .padding()
+            .background(Color(red: 0.94, green: 0.85, blue: 1.0))
+
         }
+        .background(Color(red: 0.94, green: 0.85, blue: 1.0))
     }
 
     // Fetch a single bird by ID

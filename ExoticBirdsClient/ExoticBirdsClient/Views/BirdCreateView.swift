@@ -23,81 +23,96 @@ struct BirdCreateView: View {
     
     @State private var showAlert: Bool = false
     @State private var errorMsg: String = ""
+    
+    @State private var showSuccessAlert: Bool = false
 
     
     var body: some View {
-        VStack {
-            Text("Create New Bird")
-                .font(.largeTitle)
-                .padding()
-            
-            // Alert
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("Validation Error"), message: Text(errorMsg), dismissButton: .default(Text("OK")))
-            }
-
-            // Bird Name
-            TextField("Bird Name", text: $birdName)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            // Bird Description
-            TextField("Bird Description", text: $birdDescription)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            // Countries
-            TextField("Countries", text: $birdCountries)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            // Width
-            TextField("Width", value: $birdWidth, format: .number)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)  // Allows only numeric input
-                .padding()
-
-
-            // Base64 Image String (This will be set after image is picked)
-            if let imageToDisplay = imageToDisplay {
-                Image(uiImage: imageToDisplay)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 200)
+        ScrollView {
+            VStack {
+                
+                Text("Create New Bird")
+                    .font(.largeTitle)
                     .padding()
-            } else {
-                Text("No image selected")
-                    .foregroundColor(.gray)
-            }
-
-            // Select Image Button
-            Button("Select Image") {
-                showImagePicker.toggle()
+                
+                // Alert
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text("Validation Error"), message: Text(errorMsg), dismissButton: .default(Text("OK")))
+                    }
+                
+                // Alert for success message
+                    .alert(isPresented: $showSuccessAlert) {
+                        Alert(
+                            title: Text("Success"),
+                            message: Text("Bird created successfully!"),
+                            dismissButton: .default(Text("OK"))
+                        )
+                    }
+                
+                // Bird Name
+                TextField("Bird Name", text: $birdName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                // Bird Description
+                TextField("Bird Description", text: $birdDescription)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                // Countries
+                TextField("Countries", text: $birdCountries)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                // Width
+                TextField("Width", value: $birdWidth, format: .number)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)  // Allows only numeric input
+                    .padding()
+                
+                
+                // Base64 Image String (This will be set after image is picked)
+                if let imageToDisplay = imageToDisplay {
+                    Image(uiImage: imageToDisplay)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 200)
+                        .padding()
+                } else {
+                    Text("No image selected")
+                        .foregroundColor(.gray)
+                }
+                
+                // Select Image Button
+                Button("Select Image") {
+                    showImagePicker.toggle()
+                }
+                .padding()
+                
+                // Submit Button
+                Button(action: {
+                    // Handle the submit action (e.g., save the bird data)
+                    isSubmitting = true
+                    createBird()
+                }) {
+                    Text(isSubmitting ? "Submitting..." : "Create Bird")
+                        .font(.title2)
+                        .padding()
+                        .background(isSubmitting ? Color.gray : Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .disabled(isSubmitting)
+                .padding()
+                
+                Spacer()
             }
             .padding()
-
-            // Submit Button
-            Button(action: {
-                // Handle the submit action (e.g., save the bird data)
-                isSubmitting = true
-                createBird()
-            }) {
-                Text(isSubmitting ? "Submitting..." : "Create Bird")
-                    .font(.title2)
-                    .padding()
-                    .background(isSubmitting ? Color.gray : Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+            .sheet(isPresented: $showImagePicker) {
+                ImagePickerView(imageData: $selectedImageData, selectedImage: $imageToDisplay)
             }
-            .disabled(isSubmitting)
-            .padding()
-
-            Spacer()
         }
-        .padding()
-        .sheet(isPresented: $showImagePicker) {
-            ImagePickerView(imageData: $selectedImageData, selectedImage: $imageToDisplay)
-        }
+        .background(Color(red: 0.94, green: 0.85, blue: 1.0))
     }
 
     // Function to convert selected image to base64 string and POST to backend
@@ -152,10 +167,11 @@ struct BirdCreateView: View {
                 }
 
                 if let response = response as? HTTPURLResponse {
-                    if response.statusCode == 200 {
+                    if response.statusCode == 201 {
                         print("Bird created successfully!")
                         // Reset the form after successful submission
                         resetForm()
+                        showSuccessAlert = true
                     } else {
                         // Handle validation errors in the response
                         if let data = data, let responseString = String(data: data, encoding: .utf8) {
@@ -252,7 +268,7 @@ struct ImagePickerControllerWrapper: UIViewControllerRepresentable {
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let image = info[.originalImage] as? UIImage {
                 self.selectedImage = image
-                self.imageData = image.jpegData(compressionQuality: 1.0) // You can use `.pngData()` for PNG format
+                self.imageData = image.jpegData(compressionQuality: 1.0) 
             }
             picker.dismiss(animated: true)
         }

@@ -28,88 +28,92 @@ struct BirdUpdateView: View {
 
     
     var body: some View {
-        VStack {
-            Text("Update Bird")
-                .font(.largeTitle)
-                .padding()
-            
-            // Alert
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("Validation Error"), message: Text(errorMsg), dismissButton: .default(Text("OK")))
-            }
-            
-            .alert(isPresented: $showSuccessAlert) {
-                Alert(title: Text("Successfully updated bird!"), dismissButton: .default(Text("OK")))
-            }
-
-            // Bird ID
-            TextField("Bird ID", value: $birdId, format: .number)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)  // Allows only numeric input
-                .padding()
-
-            // Bird Name
-            TextField("Bird Name", text: $birdName)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            // Bird Description
-            TextField("Bird Description", text: $birdDescription)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            // Countries
-            TextField("Countries", text: $birdCountries)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            // Width
-            TextField("Width", value: $birdWidth, format: .number)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.numberPad)  // Allows only numeric input
-                .padding()
-
-
-            // Base64 Image String (This will be set after image is picked)
-            if let imageToDisplay = imageToDisplay {
-                Image(uiImage: imageToDisplay)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 200)
+        ScrollView {
+            VStack {
+                Text("Update Bird")
+                    .font(.largeTitle)
                     .padding()
-            } else {
-                Text("No image selected")
-                    .foregroundColor(.gray)
-            }
-
-            // Select Image Button
-            Button("Select Image") {
-                showImagePicker.toggle()
+                
+                // Alert
+                    .alert(isPresented: $showAlert) {
+                        Alert(title: Text("Validation Error"), message: Text(errorMsg), dismissButton: .default(Text("OK")))
+                    }
+                
+                    .alert(isPresented: $showSuccessAlert) {
+                        Alert(title: Text("Successfully updated bird!"), dismissButton: .default(Text("OK")))
+                    }
+                
+                // Bird ID
+                TextField("Bird ID", value: $birdId, format: .number)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)  // Allows only numeric input
+                    .padding()
+                
+                // Bird Name
+                TextField("Bird Name", text: $birdName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                // Bird Description
+                TextField("Bird Description", text: $birdDescription)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                // Countries
+                TextField("Countries", text: $birdCountries)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                // Width
+                TextField("Width", value: $birdWidth, format: .number)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .keyboardType(.numberPad)  // Allows only numeric input
+                    .padding()
+                
+                
+                // Base64 Image String (This will be set after image is picked)
+                if let imageToDisplay = imageToDisplay {
+                    Image(uiImage: imageToDisplay)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 200)
+                        .padding()
+                } else {
+                    Text("No image selected")
+                        .foregroundColor(.gray)
+                }
+                
+                // Select Image Button
+                Button("Select Image") {
+                    showImagePicker.toggle()
+                }
+                .padding()
+                
+                // Submit Button
+                Button(action: {
+                    // Handle the submit action (e.g., update the bird data)
+                    isSubmitting = true
+                    updateBird()
+                }) {
+                    Text(isSubmitting ? "Submitting..." : "Update Bird")
+                        .font(.title2)
+                        .padding()
+                        .background(isSubmitting ? Color.gray : Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .disabled(isSubmitting)
+                .padding()
+                
+                Spacer()
             }
             .padding()
-
-            // Submit Button
-            Button(action: {
-                // Handle the submit action (e.g., update the bird data)
-                isSubmitting = true
-                updateBird()
-            }) {
-                Text(isSubmitting ? "Submitting..." : "Update Bird")
-                    .font(.title2)
-                    .padding()
-                    .background(isSubmitting ? Color.gray : Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+            .sheet(isPresented: $showImagePicker) {
+                ImagePickerView(imageData: $selectedImageData, selectedImage: $imageToDisplay)
             }
-            .disabled(isSubmitting)
-            .padding()
-
-            Spacer()
+            .background(Color(red: 0.94, green: 0.85, blue: 1.0))
         }
-        .padding()
-        .sheet(isPresented: $showImagePicker) {
-            ImagePickerView(imageData: $selectedImageData, selectedImage: $imageToDisplay)
-        }
+        .background(Color(red: 0.94, green: 0.85, blue: 1.0))
     }
 
     // Function to convert selected image to base64 string and PUT to backend
